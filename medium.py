@@ -4,23 +4,23 @@ import sys
 def morethanNBy3(arr, n):
     count1 = 0
     count2 = 0
-    first = sys.maxsize
-    second = sys.maxsize
+    firstcandidate = sys.maxsize    #here we create 2 candidates to check the majority
+    secondcandidate = sys.maxsize
 
     for i in range(0, n):     # if the element is seen previously then increment it by count1.
-        if (first == arr[i]):
+        if (firstcandidate == arr[i]):
             count1 += 1
                                # if the element is seen previously then increment it by count2
-        elif (second == arr[i]):
+        elif (secondcandidate == arr[i]):
             count2 += 1
 
         elif (count1 == 0):
             count1 += 1
-            first = arr[i]
+            firstcandidate = arr[i]
 
         elif (count2 == 0):
             count2 += 1
-            second = arr[i]
+            secondcandidate = arr[i]
                    # if current element is different from both the previously seen variables, decrement both the counts.
         else:
             count1 -= 1
@@ -31,17 +31,17 @@ def morethanNBy3(arr, n):
 
     #now traverse the array and find the actual counts.
     for i in range(0, n):
-        if (arr[i] == first):
+        if (arr[i] == firstcandidate):
             count1 += 1
 
-        elif (arr[i] == second):
+        elif (arr[i] == secondcandidate):
             count2 += 1
 
     if (count1 > n / 3):
-        return first
+        return firstcandidate
 
     if (count2 > n / 3):
-        return second
+        return secondcandidate
 
     return -1
 
